@@ -184,7 +184,7 @@
                   <ComponentRef name="timeSpanButtonGroup"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Date range"/>
+                <Property name="text" type="java.lang.String" value="Date range (formatted as YYYY-MM-DD)"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="dateModeRangeRadioButtonItemStateChanged"/>
@@ -293,15 +293,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="editionsLabel" alignment="1" max="32767" attributes="1"/>
+                          <Component id="databaseIdLabel" alignment="1" max="32767" attributes="1"/>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="databaseIdLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="databaseIdTextField" min="-2" pref="71" max="-2" attributes="1"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="editionsLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="editionsAhciCheckbox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="editionsIstpCheckbox" min="-2" max="-2" attributes="0"/>
@@ -322,23 +324,23 @@
                           <Component id="databaseIdTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="databaseIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="editionsLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="editionsAhciCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="editionsIstpCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="editionsSciCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="editionsSsciCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="editionsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -419,21 +421,21 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="maxRecordsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="startRecordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="sortByLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="sortByLabel" pref="153" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sortByFieldComboBox" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="startRecordLabel" pref="206" max="32767" attributes="0"/>
+                      <Component id="maxRecordsLabel" alignment="1" pref="206" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="sortByFieldComboBox" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sortByOrderComboBox" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="startRecordFormattedTextField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                      <Component id="maxRecordsFormattedTextField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="maxRecordsFormattedTextField" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="sortByOrderComboBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="startRecordFormattedTextField" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -446,14 +448,14 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="maxRecordsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="maxRecordsFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="maxRecordsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="sortByLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sortByFieldComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="sortByOrderComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortByFieldComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
               </Group>
@@ -510,7 +512,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="maxRecordsLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Maximum records to retrieve"/>
+            <Property name="text" type="java.lang.String" value="Maximum records to retrieve (1 - 100)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="maxRecordsFormattedTextField">

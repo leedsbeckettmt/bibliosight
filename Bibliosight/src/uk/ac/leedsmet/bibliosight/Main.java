@@ -36,11 +36,10 @@ import uk.ac.leedsmet.bibliosight.view.QueryViewPanel;
 public class Main
 {
 
-    public Main() {
+    public Main()
+    {
         QueryModel queryModel = new QueryModel();
-
         DefaultController controller = new DefaultController();
-
         QueryViewPanel queryViewPanel = new QueryViewPanel(controller);
 
         controller.addView(queryViewPanel);
