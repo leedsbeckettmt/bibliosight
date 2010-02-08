@@ -328,7 +328,7 @@ public class QueryViewPanel extends AbstractViewPanel {
 
         timeSpanButtonGroup.add(dateModeRangeRadioButton);
         dateModeRangeRadioButton.setSelected(true);
-        dateModeRangeRadioButton.setText("Date range");
+        dateModeRangeRadioButton.setText("Date range (formatted as YYYY-MM-DD)");
         dateModeRangeRadioButton.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 dateModeRangeRadioButtonItemStateChanged(evt);
@@ -513,14 +513,15 @@ public class QueryViewPanel extends AbstractViewPanel {
             queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(queryDatabasePanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editionsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(databaseIdLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queryDatabasePanelLayout.createSequentialGroup()
-                        .addComponent(databaseIdLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(databaseIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(queryDatabasePanelLayout.createSequentialGroup()
-                        .addComponent(editionsLabel)
-                        .addGap(27, 27, 27)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queryDatabasePanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addComponent(editionsAhciCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(editionsIstpCheckbox)
@@ -536,19 +537,19 @@ public class QueryViewPanel extends AbstractViewPanel {
                 .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(databaseIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(databaseIdLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queryDatabasePanelLayout.createSequentialGroup()
-                        .addComponent(editionsLabel)
-                        .addGap(28, 28, 28))
-                    .addGroup(queryDatabasePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(queryDatabasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(editionsAhciCheckbox)
                             .addComponent(editionsIstpCheckbox)
                             .addComponent(editionsSciCheckbox)
                             .addComponent(editionsSsciCheckbox))
-                        .addGap(23, 23, 23)))
-                .addGap(23, 23, 23))
+                        .addGap(46, 46, 46))
+                    .addGroup(queryDatabasePanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(editionsLabel)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout queryOptionsPanelLayout = new javax.swing.GroupLayout(queryOptionsPanel);
@@ -612,7 +613,7 @@ public class QueryViewPanel extends AbstractViewPanel {
             }
         });
 
-        maxRecordsLabel.setText("Maximum records to retrieve");
+        maxRecordsLabel.setText("Maximum records to retrieve (1 - 100)");
 
         maxRecordsFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         maxRecordsFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -636,18 +637,18 @@ public class QueryViewPanel extends AbstractViewPanel {
             .addGroup(retrieveOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(retrieveOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maxRecordsLabel)
-                    .addComponent(startRecordLabel)
-                    .addComponent(sortByLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, retrieveOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(sortByLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sortByFieldComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startRecordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(maxRecordsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(retrieveOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(retrieveOptionsPanelLayout.createSequentialGroup()
-                        .addComponent(sortByFieldComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sortByOrderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(startRecordFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maxRecordsFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(maxRecordsFormattedTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sortByOrderComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startRecordFormattedTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         retrieveOptionsPanelLayout.setVerticalGroup(
             retrieveOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,13 +658,13 @@ public class QueryViewPanel extends AbstractViewPanel {
                     .addComponent(startRecordFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(retrieveOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maxRecordsLabel)
-                    .addComponent(maxRecordsFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maxRecordsFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maxRecordsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(retrieveOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sortByLabel)
-                    .addComponent(sortByFieldComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sortByOrderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sortByOrderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sortByFieldComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(104, 104, 104))
         );
 
