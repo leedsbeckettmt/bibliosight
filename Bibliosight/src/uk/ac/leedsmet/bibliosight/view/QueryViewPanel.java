@@ -37,6 +37,7 @@ import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -475,7 +476,6 @@ public class QueryViewPanel extends AbstractViewPanel {
 
         editionsLabel.setText("Editions");
 
-        editionsSciCheckbox.setSelected(true);
         editionsSciCheckbox.setText("SCI");
         editionsSciCheckbox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -483,7 +483,6 @@ public class QueryViewPanel extends AbstractViewPanel {
             }
         });
 
-        editionsSsciCheckbox.setSelected(true);
         editionsSsciCheckbox.setText("SSCI");
         editionsSsciCheckbox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -491,7 +490,6 @@ public class QueryViewPanel extends AbstractViewPanel {
             }
         });
 
-        editionsAhciCheckbox.setSelected(true);
         editionsAhciCheckbox.setText("AHCI");
         editionsAhciCheckbox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -499,7 +497,6 @@ public class QueryViewPanel extends AbstractViewPanel {
             }
         });
 
-        editionsIstpCheckbox.setSelected(true);
         editionsIstpCheckbox.setText("ISTP");
         editionsIstpCheckbox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1262,14 +1259,41 @@ public class QueryViewPanel extends AbstractViewPanel {
             {
                 TimeSpan newTimeSpanValue = (TimeSpan) evt.getNewValue();
 
+                // It is preferable to pass a Date object to the formatted
+                // text field for the date range as passing a string may fail
+                // at the formatting stage.
+                // There is also the advantage of catching date parsing problems
+                // i.e. invalid dates
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date dateBegin = null;
+                Date dateEnd = null;
+
+                try
+                {
+                    dateBegin = simpleDateFormat.parse(newTimeSpanValue.getBegin());
+                }
+                catch (ParseException ex)
+                {
+                    Logger.getLogger(QueryViewPanel.class.getName()).log(Level.SEVERE, "Could not parse value for start date", ex);
+                }
+                try
+                {
+                    dateEnd = simpleDateFormat.parse(newTimeSpanValue.getEnd());
+                }
+                catch (ParseException ex)
+                {
+                    Logger.getLogger(QueryViewPanel.class.getName()).log(Level.SEVERE, "Could not parse value for end date", ex);
+                }
+
                 if (!timeSpanBeginFormattedTextField.getText().equals(newTimeSpanValue.getBegin()))
                 {
-                    timeSpanBeginFormattedTextField.setValue(newTimeSpanValue.getBegin());
+                    timeSpanBeginFormattedTextField.setValue(dateBegin);
                 }
 
                 if (!timeSpanEndFormattedTextField.getText().equals(newTimeSpanValue.getEnd()))
                 {
-                    timeSpanEndFormattedTextField.setValue(newTimeSpanValue.getEnd());
+                    timeSpanEndFormattedTextField.setValue(dateEnd);
                 }
             }
             else if (evt.getPropertyName().equals(DefaultController.WS_LITE_SEARCH_USER_QUERY_PROPERTY))
@@ -1284,7 +1308,11 @@ public class QueryViewPanel extends AbstractViewPanel {
         }
         catch (PropertyVetoException ex)
         {
-            ex.printStackTrace();
+            Logger.getLogger(QueryViewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (NullPointerException ex)
+        {
+            Logger.getLogger(QueryViewPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

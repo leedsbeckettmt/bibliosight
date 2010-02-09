@@ -20,6 +20,7 @@
 
 package uk.ac.leedsmet.bibliosight;
 
+import com.thomsonreuters.wokmws.cxf.woksearchlite.EditionDesc;
 import com.thomsonreuters.wokmws.cxf.woksearchlite.QueryField;
 import com.thomsonreuters.wokmws.cxf.woksearchlite.TimeSpan;
 import java.util.ArrayList;
@@ -51,17 +52,54 @@ public class Main
         displayFrame.pack();
         displayFrame.setVisible(true);
 
+        // Set initial database id
         queryModel.setDatabaseId("WOS");
-        queryModel.setDateMode(DefaultController.DateMode.RANGE);
-        queryModel.setFirstRecord(1);
-        queryModel.setMaxResultCount(100);
-        queryModel.setProxyHost("wwwcache.leedsmet.ac.uk");
-        queryModel.setProxyPort(3128);
-        
-        TimeSpan timeSpan = new TimeSpan();
-        timeSpan.setBegin("2008-01-01");
-        timeSpan.setEnd("2008-12-31");
 
+        // Set initial date mode
+        queryModel.setDateMode(DefaultController.DateMode.RANGE);
+
+        // Set initial time span
+        TimeSpan timeSpan = new TimeSpan();
+        timeSpan.setBegin(new String("2008-01-01"));
+        timeSpan.setEnd(new String("2008-12-31"));
+        queryModel.setTimeSpan(timeSpan);
+
+        // Set initial symbolic time span
+        queryModel.setSymbolicTimeSpan(DefaultController.SymbolicTimeSpan.FOUR_WEEK);
+
+        // Set initial record offset
+        queryModel.setFirstRecord(1);
+
+        // Set initial maximum result count
+        queryModel.setMaxResultCount(100);
+
+        // Set initial proxy
+        //queryModel.setProxyHost("proxy.example.com");
+        //queryModel.setProxyPort(8080);
+
+        // Set initial editions selection
+        ArrayList<EditionDesc> editions = new ArrayList<EditionDesc>();
+        EditionDesc editionAhci = new EditionDesc();
+        editionAhci.setEdition("AHCI");
+        editionAhci.setCollection("WOS");
+        EditionDesc editionIstp = new EditionDesc();
+        editionIstp.setEdition("ISTP");
+        editionIstp.setCollection("WOS");
+        EditionDesc editionSci = new EditionDesc();
+        editionSci.setEdition("SCI");
+        editionSci.setCollection("WOS");
+        EditionDesc editionSsci = new EditionDesc();
+        editionSsci.setEdition("SSCI");
+        editionSsci.setCollection("WOS");
+
+        editions.add(editionAhci);
+        editions.add(editionIstp);
+        editions.add(editionSci);
+        editions.add(editionSsci);
+
+        queryModel.setEditions(editions);
+
+        // Set initial sort fields
         QueryField initialQueryField = new QueryField();
         initialQueryField.setName("Date");
         initialQueryField.setSort("D");
@@ -69,7 +107,9 @@ public class Main
         initialQueryFields.add(initialQueryField);
         queryModel.setSortFields(initialQueryFields);
 
-        queryModel.setUserQuery("AD=(Leeds Met* Univ*)");
+        // Set initial user query
+        //queryModel.setUserQuery("AD=(Leeds Met* Univ*)");
+        queryModel.setUserQuery("TI=(Business)");
 
     }
 

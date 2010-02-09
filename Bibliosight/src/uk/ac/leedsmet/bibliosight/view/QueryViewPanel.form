@@ -365,7 +365,6 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="editionsSciCheckbox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="SCI"/>
               </Properties>
               <Events>
@@ -374,7 +373,6 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="editionsSsciCheckbox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="SSCI"/>
               </Properties>
               <Events>
@@ -383,7 +381,6 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="editionsAhciCheckbox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="AHCI"/>
               </Properties>
               <Events>
@@ -392,7 +389,6 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="editionsIstpCheckbox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="ISTP"/>
               </Properties>
               <Events>

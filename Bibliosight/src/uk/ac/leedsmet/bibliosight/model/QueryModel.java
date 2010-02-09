@@ -181,9 +181,19 @@ public class QueryModel extends AbstractModel {
         String oldDatabaseId = this.databaseId_;
         this.databaseId_ = databaseId;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_DATABASE_ID_PROPERTY, oldDatabaseId, databaseId);
+        try
+        {
+            if (!databaseId.equals(oldDatabaseId))
+            {
+                appendToLog("Setting database Id to " + this.databaseId_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Database Id has been given a null value.");
+        }
 
-        appendToLog("Setting database Id to " + this.databaseId_);
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_DATABASE_ID_PROPERTY, oldDatabaseId, databaseId);
     }
 
     /**
@@ -225,20 +235,31 @@ public class QueryModel extends AbstractModel {
         List<EditionDesc> oldEditions = this.editions_;
         this.editions_ = editions;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_EDITIONS_PROPERTY, oldEditions, editions);
-
-        String selectedEditions = "";
-
-        for (EditionDesc edition : this.editions_)
+        try
         {
-            if (selectedEditions.length() > 0)
+            if (!editions.equals(oldEditions))
             {
-                selectedEditions += ", ";
-            }
-            selectedEditions += edition.getEdition();
+                String selectedEditions = "";
 
+                for (EditionDesc edition : this.editions_)
+                {
+                    if (selectedEditions.length() > 0)
+                    {
+                        selectedEditions += ", ";
+                    }
+                    selectedEditions += edition.getEdition();
+
+                }
+
+                appendToLog("Setting editions to " + selectedEditions);
+            }
         }
-        appendToLog("Setting editions to " + selectedEditions);
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Editions has been given a null value.");
+        }
+
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_EDITIONS_PROPERTY, oldEditions, editions);
     }
 
     /**
@@ -258,21 +279,32 @@ public class QueryModel extends AbstractModel {
     {
         Integer minFirstRecord = getMinFirstRecord();
 
-        if (firstRecord.compareTo(minFirstRecord) < 0)
-        {
-            // This will force the property to refresh in the view
-            this.firstRecord_ = null;
-
-            firstRecord = minFirstRecord;
-            appendToLog("Start record cannot be lower than " + minFirstRecord);
-        }
-
         Integer oldFirstRecord = this.firstRecord_;
         this.firstRecord_ = firstRecord;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_FIRST_RECORD_PROPERTY, oldFirstRecord, firstRecord);
+        try
+        {
+            if (!firstRecord.equals(oldFirstRecord))
+            {
+                if (firstRecord.compareTo(minFirstRecord) < 0)
+                {
+                    // This will force the property to refresh in the view
+                    oldFirstRecord = null;
+                    firstRecord = minFirstRecord;
+                    this.firstRecord_ = minFirstRecord;
 
-        appendToLog("Setting start record to " + this.firstRecord_);
+                    appendToLog("Start record cannot be lower than " + minFirstRecord);
+                }
+
+                appendToLog("Setting start record to " + this.firstRecord_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Start record has been given a null value.");
+        }
+
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_FIRST_RECORD_PROPERTY, oldFirstRecord, firstRecord);
     }
 
     /**
@@ -293,28 +325,41 @@ public class QueryModel extends AbstractModel {
         Integer minMaxResultCount = getMinMaxResultCount();
         Integer maxMaxResultCount = getMaxMaxResultCount();
 
-        if (maxResultCount.compareTo(minMaxResultCount) < 0)
-        {
-            // This will force the property to refresh in the view
-            this.maxResultCount_ = null;
-
-            maxResultCount = minMaxResultCount;
-            appendToLog("Maximum records to retrieve cannot be lower than " + minMaxResultCount);
-        }
-        else if (maxResultCount.compareTo(maxMaxResultCount) > 0)
-        {
-            // This will force the property to refresh in the view
-            this.maxResultCount_ = null;
-
-            maxResultCount = maxMaxResultCount;
-            appendToLog("Maximum records to retrieve cannot be lower than " + maxMaxResultCount);
-        }
-
         Integer oldMaxResultCount = this.maxResultCount_;
         this.maxResultCount_ = maxResultCount;
 
+        try
+        {
+            if (!maxResultCount.equals(oldMaxResultCount))
+            {
+                if (maxResultCount.compareTo(minMaxResultCount) < 0)
+                {
+                    // This will force the property to refresh in the view
+                    oldMaxResultCount = null;
+                    maxResultCount = minMaxResultCount;
+                    this.maxResultCount_ = minMaxResultCount;
+
+                    appendToLog("Maximum records to retrieve cannot be lower than " + minMaxResultCount);
+                }
+                else if (maxResultCount.compareTo(maxMaxResultCount) > 0)
+                {
+                    // This will force the property to refresh in the view
+                    oldMaxResultCount = null;
+                    this.maxResultCount_ = maxMaxResultCount;
+                    maxResultCount = maxMaxResultCount;
+
+                    appendToLog("Maximum records to retrieve cannot be greater than " + maxMaxResultCount);
+                }
+
+                appendToLog("Setting maximum records to retrieve to " + this.maxResultCount_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Maximum records has been given a null value.");
+        }
+
         firePropertyChange(DefaultController.WS_LITE_SEARCH_MAX_RESULT_COUNT_PROPERTY, oldMaxResultCount, maxResultCount);
-        appendToLog("Setting maximum records to retrieve to " + this.maxResultCount_);
     }
 
     /**
@@ -335,9 +380,19 @@ public class QueryModel extends AbstractModel {
         String oldProxyHost = this.proxyHost_;
         this.proxyHost_ = proxyHost;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_PROXY_HOST_PROPERTY, oldProxyHost, proxyHost);
+        try
+        {
+            if (!proxyHost.equals(oldProxyHost))
+            {
+                appendToLog("Setting proxy host name to " + this.proxyHost_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Proxy host name has been given a null value.");
+        }
 
-        appendToLog("Setting proxy host name to " + this.proxyHost_);
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_PROXY_HOST_PROPERTY, oldProxyHost, proxyHost);
     }
 
     /**
@@ -358,9 +413,21 @@ public class QueryModel extends AbstractModel {
         Integer oldProxyPort = this.proxyPort_;
         this.proxyPort_ = proxyPort;
 
+        try
+        {
+            if (!proxyPort.equals(oldProxyPort))
+            {
+                appendToLog("Setting proxy host port to " + this.proxyPort_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Proxy host port has been given a null value.");
+        }
+
         firePropertyChange(DefaultController.WS_LITE_SEARCH_PROXY_PORT_PROPERTY, oldProxyPort, proxyPort);
 
-        appendToLog("Setting proxy host port to " + this.proxyPort_);
+        
     }
 
     /**
@@ -381,20 +448,31 @@ public class QueryModel extends AbstractModel {
         List<QueryField> oldSortFields = this.sortFields_;
         this.sortFields_ = sortFields;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_SORT_FIELDS_PROPERTY, oldSortFields, sortFields);
-
-        String sortFieldDisplay = "";
-
-        for (QueryField field : this.sortFields_)
+        try
         {
-            if (sortFieldDisplay.length() > 0)
+            if (!sortFields.equals(oldSortFields))
             {
-                sortFieldDisplay += ", ";
-            }
-            sortFieldDisplay += field.getName() + "(" + field.getSort() + ")";
+                String sortFieldDisplay = "";
 
+                for (QueryField field : this.sortFields_)
+                {
+                    if (sortFieldDisplay.length() > 0)
+                    {
+                        sortFieldDisplay += ", ";
+                    }
+                    sortFieldDisplay += field.getName() + "(" + field.getSort() + ")";
+
+                }
+
+                appendToLog("Setting sort fields to " + sortFieldDisplay);
+            }
         }
-        appendToLog("Setting sort fields to " + sortFieldDisplay);
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Sort fields has been given a null value.");
+        }
+
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_SORT_FIELDS_PROPERTY, oldSortFields, sortFields);
     }
 
     /**
@@ -415,9 +493,19 @@ public class QueryModel extends AbstractModel {
         SymbolicTimeSpan oldSymbolicTimeSpan = this.symbolicTimeSpan_;
         this.symbolicTimeSpan_ = symbolicTimeSpan;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_SYMBOLIC_TIME_SPAN_PROPERTY, oldSymbolicTimeSpan, symbolicTimeSpan);
+        try
+        {
+            if (!symbolicTimeSpan.equals(oldSymbolicTimeSpan))
+            {
+                appendToLog("Setting recent date to " + this.symbolicTimeSpan_.getValue());
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Recent date has been given a null value.");
+        }
 
-        appendToLog("Setting recent date to " + this.symbolicTimeSpan_.getValue());
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_SYMBOLIC_TIME_SPAN_PROPERTY, oldSymbolicTimeSpan, symbolicTimeSpan);
     }
 
     /**
@@ -438,9 +526,19 @@ public class QueryModel extends AbstractModel {
         TimeSpan oldTimeSpan = this.timeSpan_;
         this.timeSpan_ = timeSpan;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_TIME_SPAN_PROPERTY, oldTimeSpan, timeSpan);
+        try
+        {
+            if (!timeSpan.equals(oldTimeSpan))
+            {
+                appendToLog("Setting date range to " + this.timeSpan_.getBegin() + " to " + this.timeSpan_.getEnd());
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: Date range has been given a null value.");
+        }
 
-        appendToLog("Setting date range to " + this.timeSpan_.getBegin() + " to " + this.timeSpan_.getEnd());
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_TIME_SPAN_PROPERTY, oldTimeSpan, timeSpan);
     }
 
     /**
@@ -461,9 +559,19 @@ public class QueryModel extends AbstractModel {
         String oldUserQuery = this.userQuery_;
         this.userQuery_ = userQuery;
 
-        firePropertyChange(DefaultController.WS_LITE_SEARCH_USER_QUERY_PROPERTY, oldUserQuery, userQuery);
+        try
+        {
+            if (!userQuery.equals(oldUserQuery))
+            {
+                appendToLog("Setting user query to " + this.userQuery_);
+            }
+        }
+        catch (NullPointerException ex)
+        {
+            appendToLog("Warning: User query has been given a null value.");
+        }
 
-        appendToLog("Setting user query to " + this.userQuery_);
+        firePropertyChange(DefaultController.WS_LITE_SEARCH_USER_QUERY_PROPERTY, oldUserQuery, userQuery);
     }
 
     /**
