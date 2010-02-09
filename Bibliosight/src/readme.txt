@@ -2,6 +2,10 @@
 - Basic Bibliosight Information -
 ---------------------------------
 
+Java
+====
+Written with JDK 1.6
+
 Access to Web of Science - Web Services Lite
 ============================================
 See here: http://isiwebofknowledge.com/products_tools/products/related/webservices/
