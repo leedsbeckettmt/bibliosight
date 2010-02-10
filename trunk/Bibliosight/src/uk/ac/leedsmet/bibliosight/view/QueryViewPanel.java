@@ -166,6 +166,8 @@ public class QueryViewPanel extends AbstractViewPanel {
         Object fieldOrder = sortByOrderComboBox.getSelectedItem();
         String fieldOrderCode = null;
 
+        // Ascending/Descending is indicated by the characters 'A' or 'D' in
+        // the WS Lite  retrieve parameters
         if (fieldOrder.toString().equals("Ascending"))
         {
             fieldOrderCode = "A";

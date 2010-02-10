@@ -30,6 +30,7 @@ import com.thomsonreuters.wokmws.cxf.woksearchlite.SearchResults;
 import com.thomsonreuters.wokmws.cxf.woksearchlite.TimeSpan;
 import com.thomsonreuters.wokmws.cxf.woksearchlite.WokSearchLite;
 import com.thomsonreuters.wokmws.cxf.woksearchlite.WokSearchLiteService;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -851,10 +852,11 @@ public class QueryModel extends AbstractModel {
                     resultsTransformer.setRetrieveParameters(retrieveParameters);
                     resultsTransformer.setSearchResults(searchResults);
 
-                    // transform the Document into a String
+                    // Need to transform the generated XML Document into a String
                     DOMSource domSource = new DOMSource(resultsTransformer.getResultsAsDocument());
 
                     TransformerFactory tf = TransformerFactory.newInstance();
+
                     try
                     {
                         Transformer transformer = tf.newTransformer();
@@ -864,8 +866,10 @@ public class QueryModel extends AbstractModel {
                         transformer.setOutputProperty
                             ("{http://xml.apache.org/xslt}indent-amount", "4");
                         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                        java.io.StringWriter sw = new java.io.StringWriter();
+
+                        StringWriter sw = new StringWriter();
                         StreamResult sr = new StreamResult(sw);
+
                         try
                         {
                             transformer.transform(domSource, sr);
@@ -875,7 +879,6 @@ public class QueryModel extends AbstractModel {
                             resultOutput_ = xml;
 
                             firePropertyChange(DefaultController.WS_LITE_SEARCH_RESULT_OUTPUT_PROPERTY, oldResultOutput, xml);
-
                         }
                         catch (TransformerException ex)
                         {
@@ -980,37 +983,30 @@ public class QueryModel extends AbstractModel {
         catch (com.thomsonreuters.wokmws.cxf.auth.QueryException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.SessionException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.AuthenticationException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.InvalidInputException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.ESTIWSException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.InternalServerException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
         catch (SOAPFaultException ex)
         {
             throw new BibliosightAuthenticationException("Authentication with Web Services Lite failed", ex);
-            //appendToLog("Authentication with Web Services Lite failed: " + ex.getMessage());
         }
 
         return sessionId;
@@ -1079,42 +1075,37 @@ public class QueryModel extends AbstractModel {
         catch (com.thomsonreuters.wokmws.cxf.auth.QueryException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.SessionException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.AuthenticationException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.InvalidInputException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.ESTIWSException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.auth.InternalServerException_Exception ex)
         {
             throw new BibliosightAuthenticationException("Search session closure failed", ex);
-            //appendToLog("Search session closure failed: " + ex.getMessage());
         }
 
         return isSessionClosed;
     }
 
     /**
-     * 
-     * @param searchPort
-     * @param queryParameters
-     * @param retrieveParameters
+     * Queries Web of Science using the Web Services Lite service using the
+     * supplied search parameters and returns a set of search results.
+     * @param searchPort The Web Services Lite search service
+     * @param queryParameters The query options for the search
+     * @param retrieveParameters The retrieve options for the search
      * @return
      */
     private SearchResults retrieveSearchResults(
@@ -1133,37 +1124,36 @@ public class QueryModel extends AbstractModel {
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.InternalServerException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.ESTIWSException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.AuthenticationException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.QueryException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.SessionException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
         catch (com.thomsonreuters.wokmws.cxf.woksearchlite.InvalidInputException_Exception ex)
         {
             throw new BibliosightSearchException("Query execution failed", ex);
-            //appendToLog("Query execution failed: " + ex.getMessage());
         }
 
         return searchResults;
     }
 
+    /**
+     * Returns the current date formatted as the supplied string pattern indicates
+     * @param pattern
+     * @return
+     */
     private static String getCurrentDateString(String pattern)
     {
         Date searchExecutionDate = new Date();
