@@ -1,0 +1,5 @@
+The Bibliosight desktop application is the main project output, however, there are several issues with distributing a working prototype in that it has a number of dependencies, some of which are specific to the WS Lite service and it is our view that it is less confusing to release the code only, which is available from the "Source" tab.
+
+The application allows users to specify an appropriate query and retrieve bibliographic data as XML from the Web of Science using the recently released (free) WoS API (WS Lite).
+
+Please note that you will require an appropriate subscription to ISI Web of Knowledge; the service requires an authorised IP address and you will also need to register for Thomson Reuters Web of Science® web services programming interface (WS Lite) by agreeing to the Terms & Conditions at http://science.thomsonreuters.com/info/terms-ws/ and completing a registration form – if you have any problems you should contact your Thomson Reuters account manager.
